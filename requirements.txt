@@ -1,0 +1,4 @@
+streamlit
+plotly
+requests
+openai==0.28.1
