@@ -9,9 +9,9 @@ import getpass
 import os
 
 import subprocess
-subprocess.run(["apt-get", "update"])
-subprocess.run(["apt-get", "install", "-y", "ffmpeg"])
-subprocess.run(["apt-get", "install", "fonts-noto-cjk"])
+subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "update"])
+subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "install", "-y", "ffmpeg"])
+subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "install", "fonts-noto-cjk"])
 
 def create_directory_from_mindmap(graph_data, base_path):
     if not os.path.exists(base_path):
@@ -361,6 +361,7 @@ if col1.button("Generate Mind Map"):
                 # Create and display mind map
                 st.subheader("Mind Map Visualization")
                 fig = create_mindmap_figure(graph_data)
+                fig.update_layout(font=dict(family="Noto Sans CJK", size=12, color="black"))
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Add download button for the mind map
