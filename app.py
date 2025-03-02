@@ -235,12 +235,16 @@ elif input_type == "File Upload":
                 doc = docx.Document(io.BytesIO(uploaded_file.getvalue()))
                 text_input = "\n".join([paragraph.text for paragraph in doc.paragraphs])
             elif uploaded_file.type.startswith("image/"):
-                import pytesseract
+                import easyocr
+                import numpy as np
                 from PIL import Image
                 import io
-                pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
                 image = Image.open(io.BytesIO(uploaded_file.getvalue()))
-                text_input = pytesseract.image_to_string(image)
+                image_np = np.array(image)
+                reader = easyocr.Reader(['en', 'ch_sim'], gpu=False)
+                results = reader.readtext(image_np)
+                text_lines = [item[1] for item in results]
+                text_input = "\n".join(text_lines)
             elif uploaded_file.name.endswith(".mp3"):
                 import speech_recognition as sr
                 import io
