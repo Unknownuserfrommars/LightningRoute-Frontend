@@ -156,7 +156,7 @@ st.markdown("""
 
     /* Radio buttons */
     .stRadio > div {
-        background: white;
+        background: #2d3436;
         border-radius: 8px;
         padding: 1rem;
         margin: 0.5rem 0;
