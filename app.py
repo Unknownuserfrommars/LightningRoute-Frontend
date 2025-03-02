@@ -9,7 +9,7 @@ import getpass
 import os
 
 import subprocess
-password = "Administrator"
+password = "appuser"
 subprocess.run(
     ["sudo", "-S", "apt-get", "update"],
     input=password + "\n",  # Provide the password via stdin
