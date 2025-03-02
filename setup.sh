@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Update apt-get package list and install ffmpeg
-apt-get update
-apt-get install -y ffmpeg
+sudo apt-get update
+sudo apt-get install -y ffmpeg
 
 # Configure Streamlit credentials
 mkdir -p ~/.streamlit/
