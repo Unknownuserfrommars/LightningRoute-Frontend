@@ -216,7 +216,9 @@ if input_type == "Text Input":
     )
 elif input_type == "File Upload":
     uploaded_file = st.file_uploader("Choose a file", type=["txt", "docx", "doc", "pdf", "png", "jpg", "jpeg", "mp3", "mp4"])
-    st.caption("If you upload an image, the text will be extracted using OCR. Please note that it may take a few minutes for Streamlit cloud to load the model of EasyOCR. If you encounter a File Not Found Error (Or similar), please wait a few minutes and retry. If the error persists, contact us at https://github.com/Unknownuserfrommars/LightningRoute-Frontend/issues/")
+    st.caption("If you upload an image, the text will be extracted using OCR.")
+    st.caption("Please note that it may take a few minutes for Streamlit cloud to load the model of EasyOCR.")
+    st.caption("If you encounter a File Not Found Error (Or similar), please wait a few minutes and retry. If the error persists, contact us at https://github.com/Unknownuserfrommars/LightningRoute-Frontend/issues/")
     if uploaded_file is not None:
         try:
             file_extension = os.path.splitext(uploaded_file.name)[1].lower()
