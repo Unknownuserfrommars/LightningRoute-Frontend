@@ -398,9 +398,11 @@ if col1.button("Generate Mind Map"):
 with st.sidebar:
     st.header("How to use LightningRoute⚡")
     st.markdown("""
-    1. Paste your text in the input area / Upload a file (PDF, DOCX, TXT)
-    2. Click 'Generate Mind Map'
-    3. Interact with the mind map:
+   1. Paste your text in the input area / Upload a file (PDF, DOCX, TXT) / Upload a picture / Enter a video URL
+    2. Choose whether to get a structured file directory or not
+    3. Click 'Generate Mind Map'
+    4. Interact with the mind map:
         - Zoom in/out
-    4. Download the mind map (as JSON) for later use
+        - Fullscreen
+    5. Download the mind map (as JSON or PNG) for later use
     """)
