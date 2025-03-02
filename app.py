@@ -93,7 +93,7 @@ st.markdown("""
     /* Content containers */
     .stTextInput, .stTextArea, .stButton, 
     div[data-testid="stFileUploader"], .stRadio {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(0, 0, 0, 0.95);
         border-radius: 12px;
         padding: 0.7rem;
         margin: 1rem 0;
