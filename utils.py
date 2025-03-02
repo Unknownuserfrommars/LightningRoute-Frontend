@@ -144,7 +144,8 @@ def create_mindmap_figure(graph_data):
             margin=dict(b=0, l=0, r=0, t=0),
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            plot_bgcolor="black"
+            plot_bgcolor="black",
+            paper_bgcolor="black"
         )
     )
     
