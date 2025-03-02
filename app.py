@@ -9,9 +9,25 @@ import getpass
 import os
 
 import subprocess
-subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "update"], shell=True)
-subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "install", "-y", "ffmpeg"], shell=True)
-subprocess.run(["echo", "", "|", "sudo", "-S", "apt-get", "install", "fonts-noto-cjk"], shell=True)
+password = ""
+subprocess.run(
+    ["sudo", "-S", "apt-get", "update"],
+    input=password + "\n",  # Provide the password via stdin
+    text=True,              # Treat stdin/stdout as text
+    capture_output=True,    # So we can get stdout/stderr in result
+)
+subprocess.run(
+    ["sudo", "-S", "apt-get", "install", "-y", "ffmpeg"],
+    input=password + "\n",  # Provide the password via stdin
+    text=True,              # Treat stdin/stdout as text
+    capture_output=True,    # So we can get stdout/stderr in result
+)
+subprocess.run(
+    ["sudo", "-S", "apt-get", "install", "fonts-noto-cjk"],
+    input=password + "\n",  # Provide the password via stdin
+    text=True,              # Treat stdin/stdout as text
+    capture_output=True,    # So we can get stdout/stderr in result
+)
 
 def create_directory_from_mindmap(graph_data, base_path):
     if not os.path.exists(base_path):
