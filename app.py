@@ -123,7 +123,7 @@ st.markdown("""
 
     /* Headings */
     h1, h2, h3 {
-        color: white;
+        color: black;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         padding: 1rem 0;
         margin: 0;
