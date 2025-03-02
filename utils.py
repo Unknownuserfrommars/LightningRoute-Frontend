@@ -127,7 +127,7 @@ def create_mindmap_figure(graph_data):
         hoverinfo='text',
         text=node_text,
         textposition="top center",
-        textfont.color="white",
+        textfont=dict(color="white"),
         marker=dict(
             size=20,
             color='#1f77b4',
