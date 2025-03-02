@@ -8,23 +8,23 @@ import platform
 import getpass
 import os
 
-import subprocess
-password = "appuser"
-subprocess.run(
-    ["sudo", "-S", "apt-get", "update"],
-    input=password + "\n",  # Provide the password via stdin
-    text=True,              # Treat stdin/stdout as text
-)
-subprocess.run(
-    ["sudo", "-S", "apt-get", "install", "-y", "ffmpeg"],
-    input=password + "\n",  # Provide the password via stdin
-    text=True,              # Treat stdin/stdout as text
-)
-subprocess.run(
-    ["sudo", "-S", "apt-get", "install", "fonts-noto-cjk"],
-    input=password + "\n",  # Provide the password via stdin
-    text=True,              # Treat stdin/stdout as text
-)
+# import subprocess
+# password = "appuser"
+# subprocess.run(
+#     ["sudo", "-S", "apt-get", "update"],
+#     input=password + "\n",  # Provide the password via stdin
+#     text=True,              # Treat stdin/stdout as text
+# )
+# subprocess.run(
+#     ["sudo", "-S", "apt-get", "install", "-y", "ffmpeg"],
+#     input=password + "\n",  # Provide the password via stdin
+#     text=True,              # Treat stdin/stdout as text
+# )
+# subprocess.run(
+#     ["sudo", "-S", "apt-get", "install", "fonts-noto-cjk"],
+#     input=password + "\n",  # Provide the password via stdin
+#     text=True,              # Treat stdin/stdout as text
+# )
 
 def create_directory_from_mindmap(graph_data, base_path):
     if not os.path.exists(base_path):
@@ -281,12 +281,12 @@ else:
         }],
         'outtmpl': 'audio.mp3'
         }
-        import shutil
+        # import shutil
 
-        ffmpeg_path = shutil.which("ffmpeg")
-        ffprobe_path = shutil.which("ffprobe")
-        st.text(ffmpeg_path)
-        st.text(ffprobe_path)
+        # ffmpeg_path = shutil.which("ffmpeg")
+        # ffprobe_path = shutil.which("ffprobe")
+        # st.text(ffmpeg_path)
+        # st.text(ffprobe_path)
     
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([video_url])
