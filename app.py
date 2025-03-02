@@ -173,7 +173,7 @@ st.markdown("""
     }
 
     /* Responsive adjustments */
-    @media (max-width: 768px) {
+    @media (max-width: 768px) and (min-width: 480px) {
         .stButton > button {
             width: 100%;
             padding: 0.5rem;
