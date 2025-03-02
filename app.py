@@ -364,11 +364,20 @@ if col1.button("Generate Mind Map"):
                 
                 # Add download button for the mind map
                 st.download_button(
-                    "Download Mind Map",
+                    "Download Mindmap as JSON",
                     data=json.dumps(graph_data),
                     file_name="mindmap.json",
                     mime="application/json"
                 )
+
+                img_bytes = fig.to_image(format="png")
+                st.download_button(
+                label="Download Mindmap as PNG",
+                data=img_bytes,
+                file_name="plotly_chart.png",
+                mime="image/png"
+                )
+                
                 if create_dir == "Yes":
                     try:
                         # Expand the path if it contains ~
