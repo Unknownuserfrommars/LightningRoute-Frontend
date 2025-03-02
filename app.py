@@ -262,7 +262,13 @@ else:
             'preferredquality': '192',
         }],
         'outtmpl': 'audio.mp3'
-    }
+        }
+        import shutil
+
+        ffmpeg_path = shutil.which("ffmpeg")
+        ffprobe_path = shutil.which("ffprobe")
+        st.text(ffmpeg_path)
+        st.text(ffprobe_path)
     
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([video_url])
