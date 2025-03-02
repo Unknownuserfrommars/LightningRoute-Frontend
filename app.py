@@ -322,7 +322,7 @@ else:
     except Exception as e:
         st.error(f"Error reading video: {str(e)}")
 
-col1, col2 = st.columns([2,10])
+col1, col2 = st.columns([4,10])
 # Process button
 if col1.button("Generate Mind Map"):
     if text_input:
