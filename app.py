@@ -1,7 +1,6 @@
 # frontend/app.py
 import streamlit as st
 import plotly.graph_objects as go
-import requests
 import json
 import openai
 from utils import create_mindmap_figure
@@ -177,7 +176,7 @@ st.title("⚡︎ LightningRoute: AI-Powered **Mind Mapping** ⚡︎")
 
 # File upload and text input section
 st.subheader("Input Options")
-input_type = st.radio("Choose input type:", ["Text Input", "File Upload"])
+input_type = st.radio("Choose input type:", ["Text Input", "File Upload", "Video URL"])
 
 # Directory creation options
 st.subheader("Directory Creation Options")
@@ -197,10 +196,12 @@ if input_type == "Text Input":
         height=200,
         help="Paste your text here to generate a mind map"
     )
-else:
-    uploaded_file = st.file_uploader("Choose a file", type=["txt", "docx", "doc", "pdf", "png", "jpg", "jpeg"])
+elif input_type == "File Upload":
+    uploaded_file = st.file_uploader("Choose a file", type=["txt", "docx", "doc", "pdf", "png", "jpg", "jpeg", "mp3", "mp4"])
+    st.caption("If you upload an image, the text will be extracted using OCR. Please make sure that the tesseract exe is in 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'")
     if uploaded_file is not None:
         try:
+            file_extension = os.path.splitext(uploaded_file.name)[1].lower()
             if uploaded_file.type == "text/plain":
                 text_input = uploaded_file.getvalue().decode()
             elif uploaded_file.type == "application/pdf":
@@ -212,6 +213,7 @@ else:
                     text_input += page.extract_text()
             elif "word" in uploaded_file.type:
                 import docx
+                import io
                 doc = docx.Document(io.BytesIO(uploaded_file.getvalue()))
                 text_input = "\n".join([paragraph.text for paragraph in doc.paragraphs])
             elif uploaded_file.type.startswith("image/"):
@@ -221,8 +223,74 @@ else:
                 pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
                 image = Image.open(io.BytesIO(uploaded_file.getvalue()))
                 text_input = pytesseract.image_to_string(image)
+            elif uploaded_file.name.endswith(".mp3"):
+                import speech_recognition as sr
+                import io
+                r = sr.Recognizer()
+                audio = sr.AudioFile(io.BytesIO(uploaded_file.getvalue()))
+                with audio as source:
+                    audio_text = r.record(source)
+                    text_input = r.recognize_google(audio_text)
+            elif uploaded_file.name.endswith(".mp4"):
+                import speech_recognition as sr
+                import moviepy.editor as mp
+                import io
+                video = mp.VideoFileClip(uploaded_file.name)
+                audio_f = video.audio
+                audio_f.write_audiofile("temp_audio.mp3")
+                r = sr.Recognizer()
+                with sr.AudioFile("temp_audio.mp3") as source: 
+                    data = r.record(source)
+                text_input = r.recognize_google(data)
         except Exception as e:
             st.error(f"Error reading file: {str(e)}")
+else:
+    video_url = st.text_area(
+        "Enter your video URL",
+        height=100,
+        help="MUST BE FULL URL!!!"
+    )
+    try:
+        import yt_dlp
+        from pydub import AudioSegment
+        import speech_recognition as sr
+        ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': 'audio.mp3'
+    }
+    
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([video_url])
+        
+        audio_download_path = os.path.join(os.getcwd(), 'audio.mp3')
+        audio = AudioSegment.from_file(audio_download_path, format="mp3")
+        wav_path = audio_download_path.replace(".mp3", ".wav")
+        recognizer = sr.Recognizer()
+
+        with sr.AudioFile() as source:
+            print("🔊 Extracting audio...")
+            audio_data = recognizer.record(source)
+
+            try:
+                print("📝 Converting audio to text...")
+                text_input = recognizer.recognize_google(audio_data, language="zh-CN")
+            except sr.UnknownValueError:
+                raise ValueError("Cannot recognize the audio")
+            except sr.RequestError:
+                raise ConnectionError("Unable to connect Google API")
+        
+        if os.path.exists(audio_download_path):
+            os.remove(audio_download_path)
+        if os.path.exists(wav_path):
+            os.remove(wav_path)
+
+    except Exception as e:
+        st.error(f"Error reading video: {str(e)}")
 
 col1, col2 = st.columns([2,10])
 # Process button

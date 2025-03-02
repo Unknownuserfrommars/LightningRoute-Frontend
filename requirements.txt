@@ -1,4 +1,10 @@
 streamlit
 plotly
-requests
 openai==0.28.1
+PyPDF2
+docx
+pytesseract
+SpeechRecognition
+moviepy==1.0.3
+yt-dlp
+pydub
