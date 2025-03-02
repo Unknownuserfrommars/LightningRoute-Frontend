@@ -9,8 +9,8 @@ import getpass
 import os
 
 import subprocess
-subprocess.run(["sudo", "apt-get", "update"])
-subprocess.run(["sudo", "apt-get", "install", "-y", "ffmpeg"])
+subprocess.run(["apt-get", "update"])
+subprocess.run(["apt-get", "install", "-y", "ffmpeg"])
 
 def create_directory_from_mindmap(graph_data, base_path):
     if not os.path.exists(base_path):
