@@ -8,6 +8,10 @@ import platform
 import getpass
 import os
 
+import subprocess
+subprocess.run(["sudo", "apt-get", "update"])
+subprocess.run(["sudo", "apt-get", "install", "-y", "ffmpeg"])
+
 def create_directory_from_mindmap(graph_data, base_path):
     if not os.path.exists(base_path):
         os.makedirs(base_path)
@@ -44,7 +48,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 # Page configuration
 st.set_page_config(
     page_title="LightningRoute - AI-Powered Mind Mapping 🧠",
-    page_icon="⚡",
+    page_icon="favicon.png",
     layout="wide"
 )
 
