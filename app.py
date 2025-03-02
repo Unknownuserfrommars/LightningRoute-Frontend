@@ -48,7 +48,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 # Page configuration
 st.set_page_config(
     page_title="LightningRoute - AI-Powered Mind Mapping 🧠",
-    page_icon="favicon.png",
+    page_icon="Favicon.png",
     layout="wide"
 )
 
@@ -392,8 +392,4 @@ with st.sidebar:
     3. Interact with the mind map:
         - Zoom in/out
     4. Download the mind map (as JSON) for later use
-    5. OUR ROADMAP 🛣️:
-        - OCR (Done! ✅)
-        - Mindmap to directory tree (Done! ✅)
-        - Accept video input (.mp4) or video links
     """)
