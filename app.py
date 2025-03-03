@@ -300,20 +300,22 @@ else:
         audio_download_path = os.path.join(os.getcwd(), 'audio.mp3')
         audio = AudioSegment.from_file(audio_download_path, format="mp3")
         wav_path = audio_download_path.replace(".mp3", ".wav")
+        audio.export(wav_path, format="wav")
         recognizer = sr.Recognizer()
 
-        with sr.AudioFile() as source:
+        with sr.AudioFile(wav_path) as source:
             print("🔊 Extracting audio...")
             audio_data = recognizer.record(source)
 
             try:
                 print("📝 Converting audio to text...")
-                text_input = recognizer.recognize_google(audio_data, language="zh-CN")
+                text_input = recognizer.recognize_google(audio_data)
             except sr.UnknownValueError:
                 raise ValueError("Cannot recognize the audio")
             except sr.RequestError:
                 raise ConnectionError("Unable to connect Google API")
-        
+
+        # Optional cleanup
         if os.path.exists(audio_download_path):
             os.remove(audio_download_path)
         if os.path.exists(wav_path):
