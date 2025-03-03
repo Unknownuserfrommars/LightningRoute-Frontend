@@ -232,9 +232,9 @@ elif input_type == "File Upload":
                 for page in pdf_reader.pages:
                     text_input += page.extract_text()
             elif "word" in uploaded_file.type:
-                import docx
+                from docx import Document
                 import io
-                doc = docx.Document(io.BytesIO(uploaded_file.getvalue()))
+                doc = Document(io.BytesIO(uploaded_file.getvalue()))
                 text_input = "\n".join([paragraph.text for paragraph in doc.paragraphs])
             elif uploaded_file.type.startswith("image/"):
                 import easyocr
