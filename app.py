@@ -285,7 +285,7 @@ else:
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
-        'outtmpl': 'audio.mp3'
+        'outtmpl': 'audio'
         }
         # import shutil
 
