@@ -322,7 +322,7 @@ else:
             os.remove(wav_path)
 
     except Exception as e:
-        st.error(f"Error reading video: {str(e)}")
+        st.error(f"Error reading video: {repr(e)}")
 
 col1, col2 = st.columns([3,10])
 # Process button
